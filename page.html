@@ -3,16 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestion des Entrepôts</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="src/style.css">
 </head>
 <body>
     <!-- Barre de navigation (navbar) -->
     <div class="navbar">
-        <a href="#">Accueil</a>
-        <a href="#">Entrepôt 1</a>
-        <a href="#">Entrepôt 2</a>
-        <a href="#">Entrepôt 3</a>
+        <div>
+            <a href="#">Accueil</a>
+            <a href="#">Entrepôt 1</a>
+            <a href="#">Entrepôt 2</a>
+            <a href="#">Entrepôt 3</a>
+        </div>    
     </div>
+
+    <input class="hamburger" type="checkbox" id="votre_id" tabindex="0">
+    <label for="votre_id" aria-label="Menu"></label>
+
+    <nav>
+
+        <ul>
+            <li><a tabindex="0" href="#!">Rubrique 1</a></li>
+            <li><a tabindex="0" href="#!">Rubrique 2</a></li>
+            <li><a tabindex="0" href="#!">Rubrique 3</a></li>
+            <li><a tabindex="0" href="#!">Rubrique 4</a></li>
+            <li><a tabindex="0" href="#!">JSON</a></li>
+        </ul>
+
+    </nav>
 
     <!-- Contenu de la page principale -->
     <div class="container">

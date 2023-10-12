@@ -1,7 +1,13 @@
-/* Styles pour la navbar */
+*{
+    margin: 0;
+}
+
 .navbar {
-    background-color: #333;
+    background-color: #ff6600;
     overflow: hidden;
+}
+.navbar div{
+    margin-left: 90px;
 }
 
 .navbar a {
@@ -9,13 +15,14 @@
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 35px 80px;
     text-decoration: none;
+    transition: background-color 0.3s ease ;
 }
 
 .navbar a:hover {
     background-color: #ddd;
-    color: black;
+    color: #ff6600;
 }
 
 /* Styles pour la page principale */
@@ -31,3 +38,148 @@ h1 {
 p {
     font-size: 16px;
 }
+
+
+
+*,*::before,*::after{box-sizing: border-box}
+
+/*************ICONE HAMBURGER*******************/
+input[type="checkbox"] {
+    position: absolute;
+    left: -100vw;
+}	
+		
+.hamburger+label{
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    position: fixed;
+    top:20px;
+    left:20px;
+    z-index:1;
+    background:#fff;
+    border-radius: 9999px;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.4)
+}
+		
+.hamburger+label span {
+    background: #ea9c53;
+    width: 40px;
+    height: 5px;
+    position: relative;
+}
+		
+.hamburger+label span::before, 
+.hamburger+label span::after {
+    position: absolute;
+    background: #6753ea;
+    width: inherit;
+    height: inherit;
+    content: "";
+}
+	
+.hamburger+label span::before {
+    top: -10px;
+}
+.hamburger+label span::after {
+    top: 10px;
+}
+	
+.hamburger:checked+label span {
+    background: transparent;
+}
+	
+.hamburger:checked+label span::after,
+.hamburger:checked+label span::before {
+    top: 0;
+}
+	
+.hamburger:checked+label span::before {
+    transform: rotate(45deg);
+}
+	
+.hamburger:checked+label span::after {
+    transform: rotate(-45deg);
+}
+/*************ICONE HAMBURGER*******************/
+
+
+
+/*************MENU SLIDE*******************/
+nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: min(50%,300px);
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateX(-100%);
+    will-change: transform;
+}
+
+nav ul{
+    list-style-type: none;
+    padding-left:0;	
+    margin-top: 8rem;   
+}
+	
+nav ul li{
+    margin: 25px;
+}	
+
+nav a {
+    font-size:1.4rem;
+    color:white;
+    opacity: 0;
+    visibility: hidden;
+    text-decoration: none;
+}
+	
+.hamburger:checked+label~ nav{ 
+    transform: unset; /*on revient à l'état initial*/
+}
+
+.hamburger:checked+label~ nav a {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*************MENU SLIDE*******************/
+
+
+/*************Accessibilité*******************/
+.hamburger:focus-visible~label,
+nav a:focus-visible,
+nav a:focus {
+    outline: 2px solid #ff8800;
+    outline-offset: 4px;
+}
+	
+.hamburger:not(:focus-visible)~label,nav a:not(:focus):focus-visible{
+    outline: none;
+}	
+	
+.hamburger:not(:focus-visible):focus~label{
+	box-shadow: 0 0 0 4px #ff8800
+}
+	
+@media (prefers-reduced-motion: no-preference) {
+    .hamburger+label span {transition: background 10ms 300ms;}
+    .hamburger+label span::before, 
+    .hamburger+label span::after{transition: top 300ms 350ms, transform 300ms 50ms;}
+    .hamburger:checked+label span::after,
+    .hamburger:checked+label span::before {transition: top 300ms 50ms, transform 300ms 350ms;}	
+        
+    .hamburger:focus-visible~label,nav a:focus-visible,
+    nav a:focus  {transition: outline-offset .25s ease;}
+        
+    nav{transition: transform 0.5s;}
+    nav a{transition: visibility 500ms,opacity 500ms 300ms;}
+}
+
+/*************Accessibilité*******************/
+
+
