@@ -319,9 +319,9 @@ func main() {
 
 	//---------------------------Fin API-------------------------//
 
-	fmt.Println("All's good: Listening on ( http://localhost:8000/ )")
+	fmt.Println("All's good: Listening on ( http://localhost:8080/ )")
 
-	router.Run(":8000") // Run du Serveur
+	router.Run(":8080") // Run du Serveur
 }
 
 //Fonction SCRIPT
