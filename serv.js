@@ -3,7 +3,7 @@ const app = express();
 const port = 8080; // Port sur lequel le serveur écoutera
 
 app.get('/', (req,res) => {
-    res.redirect('/page.html');
+    res.redirect('./tmpl/page.html');
 });
 
 
