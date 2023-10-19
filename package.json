@@ -1,0 +1,11 @@
+{
+  "name": "sql_stockage",
+  "version": "1.0.0",
+  "description": "SQL pour Ynov (Quentin)",
+  "main": "serv.js",
+  "scripts": {
+    "test": "?t"
+  },
+  "author": "FreeZe",
+  "license": "ISC"
+}
