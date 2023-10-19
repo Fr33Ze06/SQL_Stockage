@@ -131,13 +131,13 @@ nav {
 
 nav ul{
     list-style-type: none;
-    padding-left:0;	
-    margin-top: 8rem;   
+    padding-left:0;
+    margin-top: 8rem;
 }
-	
+
 nav ul li{
     margin: 25px;
-}	
+}
 
 ul > li:hover > a > span {
     color: white;
@@ -172,7 +172,7 @@ nav a {
     visibility: hidden;
     text-decoration: none;
 }
-	
+
 .hamburger:checked+label~ nav{ 
     transform: unset; /*on revient à l'état initial*/
 }
