@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../src/entrepot.css">
+    <link rel="stylesheet" type="text/css" href="../static/entrepot.css">
   </head>
   <body>
 
@@ -13,7 +13,7 @@
       <table>
         <tr>
             <th>Type <a href="EntrepotNY.html">
-              <img class="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
+              <img id="fleche" class="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
             <th>Nom</th>
             <th>Capacité</th>
             <th>Dta de creation</th>
@@ -35,9 +35,9 @@
 
       <script>
         var fleche = document.getElementById('fleche');
-        fleche.addEventListener('click', function() {
-          fleche.style.left = '50%';
-        });
+        fleche.onclick = function() {
+          fleche.style.transform = 'rotate(90deg)';
+        };
       </script>
   </body>
 </html>

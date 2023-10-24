@@ -248,6 +248,10 @@ img:hover{
     /* margin-bottom: 20px; */
   }
 
+.entrepot a {
+    font-style: none;
+}
+
 /************************** Styles pour le Footer **********************/
 
 footer {
