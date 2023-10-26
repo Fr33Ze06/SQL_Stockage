@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<link rel="stylesheet" type="text/css" href="/style.css">
+	</head>
+	<body>
+
+		<!-- Barre de navigation (navbar) -->
+		<div class="navbar">
+			<div>
+				<a href="/">Accueil</a>
+				<a href="#">Entrepôt 1</a>
+				<a href="#">Entrepôt 2</a>
+				<a href="#">Entrepôt 3</a>
+			</div>    
+		</div>
+
+		<input class="hamburger" type="checkbox" id="votre_id" tabindex="0">
+		<label for="votre_id" aria-label="Menu"></label>
+
+		<nav>
+
+			<ul>
+				<li><a tabindex="0" href="#!"><span class="hover-underline-animation">Rubrique 1</span></a></li>
+				<li><a tabindex="0" href="#!"><span class="hover-underline-animation">Rubrique 2</span></a></li>
+				<li><a tabindex="0" href="#!"><span class="hover-underline-animation">Rubrique 3</span></a></li>
+				<li><a tabindex="0" href="#!"><span class="hover-underline-animation">Rubrique 4</span></a></li>
+				<li><a tabindex="0" href="/JSON"><span class="hover-underline-animation">JSON</span></a></li>
+			</ul>
+	
+		</nav>
+
+		<div class="all_container">
+
+			<div class="container">
+				<h1><%= entrepot_info.name %></h1>
+				<p></p>
+			</div>
+		
+			<main>
+				<table>
+					<tr>
+						<th>Nom Objet </th>
+						<th>Type <a href="#!"><img class="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
+						<th>Image</th>
+						<th>ID Objet</th>
+						<th>Quantité</th>
+					</tr>
+					<tr>
+						<td>Ligne 1, Colonne 1</td>
+						<td>Ligne 1, Colonne 2</td>
+						<td>Ligne 1, Colonne 3</td>
+						<td>Ligne 1, Colonne 4</td>
+						<td>Ligne 1, Colonne 5</td>
+					</tr>
+				</table>
+			</main>
+
+		</div>
+
+      <footer>
+        <p>&copy; 2023 Mon Entreprise. Tous droits réservés.</p>
+      </footer>
+
+      <script>
+        	var fleche = document.getElementById('fleche');
+        	fleche.addEventListener('click', function() {fleche.style.left = '50%';});
+      </script>
+  </body>
+</html>

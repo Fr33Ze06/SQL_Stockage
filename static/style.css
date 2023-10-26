@@ -5,18 +5,41 @@
 /************************** Initialisation **********************/
 
 html{
-    overflow: hidden;
+    background-color: rgb(190, 190, 190);
+    /* overflow: hidden; */
 }
 
 /************************** Style pour la navbar **********************/
 
 .navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    top:0;
     background-color: #ff6600;
     overflow: hidden;
 }
 .navbar div{
     margin-left: 90px;
 }
+
+.pack{
+    position: absolute;
+    border-radius: 0%;
+    box-shadow: none;
+    right: 20px;
+    top: 15px;
+    z-index: 10;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    transition: ease-in-out 0.2s;
+}
+
+.pack:hover {
+    transform: translateY(-1px);
+}
+    
 
 .navbar a {
     float: left;
@@ -124,6 +147,7 @@ nav {
     height: 100%;
     width: min(50%,300px);
     background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transform: translateX(-100%);
     will-change: transform;
     z-index: 8;
@@ -224,16 +248,25 @@ nav a:focus {
     position: absolute;
     flex-direction: column;
     Font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-    top: 25%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.container div{
-    display: block;
-    width: 50px;
-    height: 50px;
-    background-color: #333;
+.all_container{
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 75%; /* Largeur du conteneur */
+    height: 100%;
+    background-color: #ffffff; /* Couleur de fond du conteneur */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.2);
+}
+
+h1{
+    text-align: center;
 }
 
 /************************ Styles pour le JSON ***********************/
@@ -265,8 +298,8 @@ nav a:focus {
 
 /************************** Styles pour l'entrepot **********************/
 
-img{
-    width: 20%;
+.img_entrepot{
+    width: 28%;
     border-radius: 20px;
     cursor: pointer;
     margin: 10px;
@@ -274,7 +307,7 @@ img{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-img:hover{
+.img_entrepot:hover{
     transform: translateY(-5px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -282,12 +315,17 @@ img:hover{
 .entrepot {
     text-align: center;
     position: absolute;
-    top: 35%;
-    /* margin-bottom: 20px; */
-  }
+    top: 30%;
+}
 
 .entrepot a {
     font-style: none;
+}
+
+.name{
+    text-align: center;
+    margin: 0 50px;
+    position: absolute;
 }
 
 /************************** Styles pour le Footer **********************/
@@ -297,12 +335,46 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
   
 footer p {
     margin: 0;
+}
+
+
+
+/******************************************************************PAGE ENTREPOT****************************************************************************************/
+  
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 0 auto; 
+    margin-top: 2%;
+}
+  
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+  
+th {
+    background-color: #f2f2f2;
+}
+  
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+  
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+  
+.fleche{
+  width: 5%;
+  margin-left: 5%;
 }
   
