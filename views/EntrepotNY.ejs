@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../src/entrepot.css">
+  </head>
+  <body>
+
+    <header>
+      <h1>Entrepôt New York</h1>
+    </header>
+
+    <main>
+      <table>
+        <tr>
+            <th>Type <a href="EntrepotNY.html">
+              <img class="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
+            <th>Nom</th>
+            <th>Capacité</th>
+            <th>Dta de creation</th>
+            <th>En-tête 2</th>
+        </tr>
+        <tr>
+            <td>Ligne 1, Colonne 1</td>
+            <td>Ligne 1, Colonne 2</td>
+            <td>Ligne 1, Colonne 3</td>
+            <td>Ligne 1, Colonne 4</td>
+            <td>Ligne 1, Colonne 5</td>
+        </tr>
+    </table>
+    </main>
+
+      <footer>
+        <p>&copy; 2023 Mon Entreprise. Tous droits réservés.</p>
+      </footer>
+
+      <script>
+        var fleche = document.getElementById('fleche');
+        fleche.addEventListener('click', function() {
+          fleche.style.left = '50%';
+        });
+      </script>
+  </body>
+</html>
