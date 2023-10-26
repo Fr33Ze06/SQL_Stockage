@@ -28,24 +28,6 @@ connection.connect((err) => {
     }
 });
 
-/* Routes */
-
-const dir = path.join(__dirname, '/');
-app.use(express.static('static'));
-
-app.get('/', (req, res) => {
-    connection.query('SELECT entrepots.*, lieux.image AS lieux_image FROM entrepots JOIN lieux ON entrepots.id_lieu = lieux.id', (error, results) => {
-        if (error) {
-            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
-            return;
-        }
-        
-        res.render('accueil', { entrepots: results });
-    });
-});
-
-
-
 /* Page JSON */
 
 app.get('/JSON', (req, res) => {
@@ -73,13 +55,21 @@ app.get('/JSON/:jsonName', (req, res) => {
     });
 });
 
+/* Routes */
 
+const dir = path.join(__dirname, '/');
+app.use(express.static('static'));
 
-
-
-
-
-
+app.get('/', (req, res) => {
+    connection.query('SELECT entrepots.*, lieux.image AS lieux_image FROM entrepots JOIN lieux ON entrepots.id_lieu = lieux.id', (error, results) => {
+        if (error) {
+            console.error('Erreur lors de la récupération des entrepôts : ' + error.message);
+            return;
+        }
+        
+        res.render('accueil', { entrepots: results });
+    });
+});
 
 
 
