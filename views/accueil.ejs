@@ -53,6 +53,7 @@
             </a>
             <% entrepots.forEach(function(entrepot) { %>
                 <a href="Entrepot/<%=entrepot.id%>">
+                    <li><%= entrepot.lieu_image %></li>
                 <img href="<%= entrepot.lieu_image %>">
                 </a>
             <% }); %>
