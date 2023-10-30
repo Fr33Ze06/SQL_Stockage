@@ -74,7 +74,7 @@ app.get('/Entrepot/:id', (req, res) => {
     
     // Récupérer les informations de l'entrepot
     connection.query(
-        'SELECT entrepots.*, lieux.image AS lieux_image FROM entrepots JOIN lieux ON entrepots.id_lieu = lieux.id WHERE entrepots.id = ?',
+        'SELECT entrepots.*, lieux.image AS lieux_image, pays, ville FROM entrepots JOIN lieux ON entrepots.id_lieu = lieux.id WHERE entrepots.id = ?',
         [id],
         (error, results) => {
             if (error) {
@@ -99,7 +99,7 @@ app.get('/Entrepot/:id', (req, res) => {
                         count_Q += item.quantity;
                     });
 
-                    console.log(count_Q);
+                    console.log(results[0]);
                     console.log(stockResults);
                     // Rendre la page 'entrepot.ejs'
                     res.render('entrepot', {entrepot_info: results[0], stock_info: stockResults, quantity_all: count_Q});

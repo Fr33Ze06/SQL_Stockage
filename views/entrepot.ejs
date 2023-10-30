@@ -2,6 +2,9 @@
 <html>
 	<head>
 			<link rel="stylesheet" type="text/css" href="/style.css">
+			<style>
+				@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@300&display=swap');
+			</style>
 	</head>
 	<body>
 
@@ -12,6 +15,7 @@
 				<a href="#">Entrepôt 1</a>
 				<a href="#">Entrepôt 2</a>
 				<a href="#">Entrepôt 3</a>
+				<a href="/"><img class="pack" src="../img/packages.png" alt=""></a>
 			</div>    
 		</div>
 
@@ -31,13 +35,17 @@
 		</nav>
 
 		<div class="all_container">
-
-			<div class="container">
+			<div class="container_infoEntrepot">
 				<h1><%= entrepot_info.name %></h1>
-				<p></p>
+				<h2>Info sur l'entrepot :</h2>
+				<p>ID de l'entrepot : <%= entrepot_info.id %></p>
+				<p>Date de creation : <%= entrepot_info.date_creation %></p>
+				<p>Pays: <%= entrepot_info.pays %>      Ville: <%= entrepot_info.ville %> </p>
 			</div>
 		
-			<main>
+			<div class="container_table">
+				<h3>Capacité : <%= quantity_all %> / <%= entrepot_info.cap_max %></h3>
+				<p>Il reste <%= entrepot_info.cap_max - quantity_all  %> de places</p>
 				<table>
 					<tr>
 						<th>Nom Objet </th>
@@ -46,16 +54,19 @@
 						<th>ID Objet</th>
 						<th>Quantité</th>
 					</tr>
-					<tr>
-						<td>Ligne 1, Colonne 1</td>
-						<td>Ligne 1, Colonne 2</td>
-						<td>Ligne 1, Colonne 3</td>
-						<td>Ligne 1, Colonne 4</td>
-						<td>Ligne 1, Colonne 5</td>
-					</tr>
-				</table>
-			</main>
 
+					<% stock_info.forEach(function(objet) { %>
+						<tr>
+							<td><%= objet.name %></td>
+							<td><%= objet.id_type %></td>
+							<td><img src="<%= objet.image %>" style: width="50%"></td>
+							<td><%= objet.id %></td>
+							<td><%= objet.quantity %></td>
+						</tr>
+					<% }); %>
+					
+				</table>
+			</div>
 		</div>
 
       <footer>
