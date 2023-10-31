@@ -1,0 +1,5 @@
+C:\Users\User\Documents\GitHub\SQL_Stockage\SQL_stockage\obj\Debug\net5.0-windows\SQL_stockage.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\SQL_Stockage\SQL_stockage\obj\Debug\net5.0-windows\SQL_stockage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\SQL_Stockage\SQL_stockage\obj\Debug\net5.0-windows\SQL_stockage.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\SQL_Stockage\SQL_stockage\obj\Debug\net5.0-windows\SQL_stockage.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\SQL_Stockage\SQL_stockage\obj\Debug\net5.0-windows\SQL_stockage.csproj.CoreCompileInputs.cache
