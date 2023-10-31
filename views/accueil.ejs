@@ -10,9 +10,9 @@
     <div class="navbar">
         <div>
             <a href="/">Accueil</a>
-            <a href="#">Entrepôt 1</a>
-            <a href="#">Entrepôt 2</a>
-            <a href="#">Entrepôt 3</a>
+            <a href="#">Entrepôt NY</a>
+            <a href="#">Entrepôt Paris</a>
+            <a href="#">Entrepôt Londres</a>
             <a href="/"><img class="pack" src="../img/packages.png" alt=""></a>
         </div>    
     </div>
@@ -35,7 +35,7 @@
     <!-- Contenu de la page principale -->
     <div class="all_container">
 
-        <div class="container">
+        <div class="container_txt">
             <h1>Gestion des Entrepôts</h1>
             <p> Notre plateforme de gestion des entrepôts et des stocks est l'épine dorsale de notre service.<br> 
                 Grâce à cette plateforme innovante, vous pouvez gérer en temps réel l'inventaire de vos produits, suivre les mouvements, et optimiser la distribution à partir de nos entrepôts mondiaux.<br> 
@@ -44,14 +44,15 @@
         </div>
     
         <div class="entrepot-container">
-            <div class="entrepot">
-                <% entrepots.forEach(function(entrepot) { %>
+            
+            <% entrepots.forEach(function(entrepot) { %>
+                <div class="entrepot">
                     <a href="/Entrepot/<%= entrepot.id %>">
                         <img class="img_entrepot" src="<%= entrepot.lieux_image %>" alt="Image de la ville">
                     </a>
                     <p class="name"><%= entrepot.name %></p>
-                <% }); %>
-            </div>
+                </div>
+            <% }); %>
         </div>
         
     </div>

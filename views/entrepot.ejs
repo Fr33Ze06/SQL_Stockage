@@ -2,6 +2,7 @@
 <html>
 	<head>
 			<link rel="stylesheet" type="text/css" href="/style.css">
+			<script src="/javascript.js"></script>
 			<style>
 				@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@300&display=swap');
 			</style>
@@ -34,13 +35,17 @@
 	
 		</nav>
 
-		<div class="all_container">
+		<div class="all_container1">
 			<div class="container_infoEntrepot">
 				<h1><%= entrepot_info.name %></h1>
 				<h2>Info sur l'entrepot :</h2>
-				<p>ID de l'entrepot : <%= entrepot_info.id %></p>
-				<p>Date de creation : <%= entrepot_info.date_creation %></p>
-				<p>Pays: <%= entrepot_info.pays %>      Ville: <%= entrepot_info.ville %> </p>
+				<div class="container_p">
+					<p><b>ID de l'entrepot :</b> <%= entrepot_info.id %></p>
+					<p><b>Date de creation :</b> <%= entrepot_info.date_creation %></p>
+					<p><b>Pays:</b> <%= entrepot_info.pays %></p>
+					<p><b>Ville:</b> <%= entrepot_info.ville %></p>
+					<p><b>Capacité max:</b> <%= entrepot_info.cap_max %></p>
+				</div>
 			</div>
 		
 			<div class="container_table">
@@ -49,7 +54,7 @@
 				<table>
 					<tr>
 						<th>Nom Objet </th>
-						<th>Type <a href="#!"><img class="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
+						<th>Type <a href="#!"><img class="fleche" id="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
 						<th>Image</th>
 						<th>ID Objet</th>
 						<th>Quantité</th>
@@ -58,8 +63,8 @@
 					<% stock_info.forEach(function(objet) { %>
 						<tr>
 							<td><%= objet.name %></td>
-							<td><%= objet.id_type %></td>
-							<td><img src="<%= objet.image %>" style: width="50%"></td>
+							<td><%= objet.type_name %></td>
+							<td><img src="<%= objet.image %>" style: width="30%"></td>
 							<td><%= objet.id %></td>
 							<td><%= objet.quantity %></td>
 						</tr>
@@ -72,10 +77,5 @@
       <footer>
         <p>&copy; 2023 Mon Entreprise. Tous droits réservés.</p>
       </footer>
-
-      <script>
-        	var fleche = document.getElementById('fleche');
-        	fleche.addEventListener('click', function() {fleche.style.left = '50%';});
-      </script>
   </body>
 </html>

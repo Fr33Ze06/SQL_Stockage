@@ -246,13 +246,17 @@ nav a:focus {
 
 /************************** Styles pour le container **********************/
 
-.container{
-    position: absolute;
+.container_txt{
+    display: flex;
     flex-direction: column;
+    margin: 5vh 30% 10vh 30%;
+    justify-content: center;
+    align-items: center;
     Font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+.container_txt h1{
+    margin-bottom: 25px;
 }
 
 .all_container{
@@ -307,33 +311,32 @@ h1{
 
 /************************** Styles pour l'entrepot **********************/
 
-.img_entrepot{
-    width: 28%;
+
+.entrepot-container{
+    display: flex;
+    text-align: center;
+    align-items: flex-end;
+}
+
+.entrepot p {
+    text-align: center;
+}
+
+.entrepot img{
+    width: 90%;
     border-radius: 20px;
     cursor: pointer;
-    margin: 10px;
     transition: ease-in-out 0.2s;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.img_entrepot:hover{
+.entrepot img:hover{
     transform: translateY(-5px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.entrepot {
-    text-align: center;
-    position: absolute;
-    top: 30%;
-    margin-top: 5vh;
-}
-
 .entrepot a {
     font-style: none;
-}
-
-.name{
-    display: flex;
 }
 
 /************************** Styles pour le Footer **********************/
@@ -356,14 +359,31 @@ footer p {
 
 /******************************************************************PAGE ENTREPOT****************************************************************************************/
   
+
+.all_container1 {
+    width: 75%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.2);
+    margin: 20vh auto; /* Centre le conteneur horizontalement */
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+    height: 100%;
+}
+
 table {
     width: 120vh;
     border-collapse: collapse; 
     margin-top: 1vh;
+    margin-bottom: 10vh;
 }
   
 th, td {
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 8px;
     text-align: center;
     border-radius: 10px;
@@ -390,12 +410,17 @@ tr:nth-child(odd) {
 }
 
 .container_infoEntrepot h1{
-    margin-bottom: 2vh;
+    margin: 5vh 0 3vh 0vh;
 }
 
 .container_infoEntrepot h2{
     justify-content: space-between;
     display: flex;
+}
+
+.container_p{
+    margin-top: 2vh;
+    text-align: left;
 }
 
 .container_table{
@@ -407,8 +432,8 @@ tr:nth-child(odd) {
 }
   
 .fleche{
-  width: 5%;
-  height: 5%;
-  margin-left: 5%;
+    width: 5%;
+    height: 5%;
+    margin-left: 5%;
 }
   
