@@ -20,7 +20,7 @@ namespace SQL_stockage
             string connectionString = "Server=127.0.0.1;Database=stockage;User Id=root;Password=;";
             DbManager dbManager = new DbManager(connectionString);
 
-            Application.Run(new Form1(dbManager));
+            Application.Run(new Form1());
         }
     }
 }

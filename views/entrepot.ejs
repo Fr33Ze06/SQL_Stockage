@@ -97,37 +97,10 @@
 		var tri_az = (fleche.getAttribute("tri_az") || false);
 
 		var table, rows, switching, i, x, y, shouldSwitch;
-		table = document.getElementById("table"); // Remplacez "myTable" par l'ID de votre tableau
-		switching = true;
+		table = document.getElementById("table"); 
+		rows = table.rows;
 		
-		while (switching) {
-			switching = false;
-			rows = table.rows;
-			
-			for (i = 1; i < (rows.length - 1); i++) {
-				shouldSwitch = false;
-				x = rows[i].getElementsByTagName("td")[id_row];
-				y = rows[i + 1].getElementsByTagName("td")[id_row];
-				
-				if (!tri_az){
-					if (x.innerHTML > y.innerHTML) {
-						shouldSwitch = true;
-						fleche.setAttribute("tri_az", true);
-						break;
-					}
-				}else{
-					if (x.innerHTML < y.innerHTML) {
-						shouldSwitch = true;
-						fleche.setAttribute("tri_az", false);
-						break;
-					}
-				}
-			}
-			
-			if (shouldSwitch) {
-				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-				switching = true;
-			}
-		}
+		//faie un tri par insertion
+	
 	}
 </script>
