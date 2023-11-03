@@ -17,9 +17,8 @@ namespace SQL_stockage
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             string connectionString = "Server=127.0.0.1;Database=stockage;User Id=root;Password=;";
-            DatabaseManager dbManager = new DbManager(connectionString);
+            DbManager dbManager = new DbManager(connectionString);
 
             Application.Run(new Form1(dbManager));
         }

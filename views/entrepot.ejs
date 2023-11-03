@@ -2,7 +2,7 @@
 <html>
 	<head>
 			<link rel="stylesheet" type="text/css" href="/style.css">
-			<script src="/javascript.js"></script>
+			<script src="../static/javascript.js"></script>
 			<style>
 				@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@300&display=swap');
 			</style>
@@ -49,15 +49,16 @@
 			</div>
 		
 			<div class="container_table">
+				<div class=""></div>
 				<h3>Capacité : <%= quantity_all %> / <%= entrepot_info.cap_max %></h3>
 				<p>Il reste <%= entrepot_info.cap_max - quantity_all  %> de places</p>
-				<table>
+				<table  id="table">
 					<tr>
 						<th>Nom Objet </th>
-						<th>Type <a href="#!"><img class="fleche" id="fleche" src="../img/fleche-vers-le-bas.png" alt=""></a></th>
+						<th>Type <a href="#!" ><img class="fleche" id="fleche_type" id_row="1" src="../img/fleche-vers-le-bas.png" alt="" onclick="rotate(event)"></a></th>
 						<th>Image</th>
-						<th>ID Objet</th>
-						<th>Quantité</th>
+						<th>ID Objet <a href="#!"><img class="fleche" id="fleche_ID" id_row="3" src="../img/fleche-vers-le-bas.png" alt="" onclick="rotate(event)"></a></th>
+						<th>Quantité <a href="#!"><img class="fleche" id="fleche_Q" id_row="4" src="../img/fleche-vers-le-bas.png" alt="" onclick="rotate(event)"></a></th>
 					</tr>
 
 					<% stock_info.forEach(function(objet) { %>
@@ -79,3 +80,54 @@
       </footer>
   </body>
 </html>
+
+<script>
+	function rotate(event) {
+		var fleche = event.target;
+		var currentTransform = fleche.style.transform;
+    	var currentRotation = parseInt(fleche.getAttribute("data-rotation") || 0);
+    	var newRotation = currentRotation + 180;
+		fleche.setAttribute("data-rotation", newRotation);
+		fleche.style.transform = `rotate(${newRotation}deg)`;
+		sortTable(fleche);
+	}
+
+	function sortTable(fleche) {
+		var id_row = fleche.getAttribute("id_row");
+		var tri_az = (fleche.getAttribute("tri_az") || false);
+
+		var table, rows, switching, i, x, y, shouldSwitch;
+		table = document.getElementById("table"); // Remplacez "myTable" par l'ID de votre tableau
+		switching = true;
+		
+		while (switching) {
+			switching = false;
+			rows = table.rows;
+			
+			for (i = 1; i < (rows.length - 1); i++) {
+				shouldSwitch = false;
+				x = rows[i].getElementsByTagName("td")[id_row];
+				y = rows[i + 1].getElementsByTagName("td")[id_row];
+				
+				if (!tri_az){
+					if (x.innerHTML > y.innerHTML) {
+						shouldSwitch = true;
+						fleche.setAttribute("tri_az", true);
+						break;
+					}
+				}else{
+					if (x.innerHTML < y.innerHTML) {
+						shouldSwitch = true;
+						fleche.setAttribute("tri_az", false);
+						break;
+					}
+				}
+			}
+			
+			if (shouldSwitch) {
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+			}
+		}
+	}
+</script>
