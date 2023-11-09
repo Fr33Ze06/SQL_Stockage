@@ -277,9 +277,15 @@ h1{
 
 /************************ Styles pour le JSON ***********************/
 
-.title{
-    margin-top: 5vh;
+.titre-json{
+    margin-top: 10vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
 
 .container-json {
     background-color: #fff;
