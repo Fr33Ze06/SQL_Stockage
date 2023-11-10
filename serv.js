@@ -83,11 +83,6 @@ app.get('/Entrepot/:id', (req, res) => {
             }
             
             // Récupérer les objets stockés dans l'entrepôt
-            
-                // 'SELECT liste_objets.*, stock.quantity, types.type FROM stock' +
-                // 'JOIN liste_objets ON stock.id_objet = liste_objets.id ' +
-                // 'JOIN types ON liste_objets.id_type = types.id '+
-                // 'WHERE stock.id_entrepot = ?'
             connection.query(
                 'SELECT liste_objets.*, stock.quantity, types.type AS type_name FROM stock ' +
                 'JOIN liste_objets ON stock.id_objet = liste_objets.id ' +
