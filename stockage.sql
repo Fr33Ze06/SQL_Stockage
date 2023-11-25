@@ -16,10 +16,12 @@
 
 
 -- Listage de la structure de la base pour stockage
+DROP DATABASE IF EXISTS `stockage`;
 CREATE DATABASE IF NOT EXISTS `stockage` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `stockage`;
 
 -- Listage de la structure de table stockage. entrepots
+DROP TABLE IF EXISTS `entrepots`;
 CREATE TABLE IF NOT EXISTS `entrepots` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text,
@@ -39,6 +41,7 @@ INSERT INTO `entrepots` (`id`, `name`, `cap_max`, `date_creation`, `id_lieu`) VA
 	(3, 'Entrepot Londres', '3500', '2005-05-23', 3);
 
 -- Listage de la structure de table stockage. lieux
+DROP TABLE IF EXISTS `lieux`;
 CREATE TABLE IF NOT EXISTS `lieux` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ville` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -55,17 +58,18 @@ INSERT INTO `lieux` (`id`, `ville`, `pays`, `image`) VALUES
 	(3, 'Londres', 'Royaume-Unis', 'https://c.wallhere.com/photos/e3/61/London_buses_Big_Ben_sunset_road-1401545.jpg!d');
 
 -- Listage de la structure de table stockage. liste_objets
+DROP TABLE IF EXISTS `liste_objets`;
 CREATE TABLE IF NOT EXISTS `liste_objets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
-  `image` text NOT NULL,
+  `image` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
   `id_type` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_type` (`id_type`),
   CONSTRAINT `FK_liste_objets_types` FOREIGN KEY (`id_type`) REFERENCES `types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table stockage.liste_objets : ~60 rows (environ)
+-- Listage des données de la table stockage.liste_objets : ~61 rows (environ)
 DELETE FROM `liste_objets`;
 INSERT INTO `liste_objets` (`id`, `name`, `image`, `id_type`) VALUES
 	(1, 'TéléviseurLG', 'https://www.lg.com/fr/images/televiseurs/md05988500/gallery/medium02.jpg', 3),
@@ -122,14 +126,16 @@ INSERT INTO `liste_objets` (`id`, `name`, `image`, `id_type`) VALUES
 	(52, 'chaise longue', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTFHA4mRqTdoOmyuq68maE1U12uRNDixlTHOI2COr8I1_YmCEDUAkqILzPd87dOwGqOtHUEpbxRBnaOhFS7ZQamV0NVoyrG5XxvOOPL8o3l&usqp=CAE', 1),
 	(53, 'fauteuil', 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQhl_K3iFGxBRevhVSUJ662Hojna1NKArue_M0w36G0dS4C5CeWOJdlmTlxm9z9MDs7ynJ00DphiWf5-MIFAxEfIbnIaBB8juEMXm2LlR4l&usqp=CAE', 1),
 	(54, 'haltère', 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSxpgZ_ncGlmSF8SbPdZHSJz0EERwQGAOatBuSeusEWlR6HhZ9sn96MmCGRxAk4bDTgqfkCZ62eXnjOxoRX90LfccStXTHX-w8r8yylYusy23WnmTtSVIkbNg&usqp=CAE', 20),
-	(55, 'vélo dintérieur', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRL4tShcyt3uBZF49x-c-C-6O32WZIcnZ_hmBy9Zc-JD-edpHMBUlZhFTBMafOEy2Ue_1LLCIWpNp-MFbEtCwNL7AFRaVVFiajgIRgbjoEVZ8JLYAfQBW20KA&usqp=CAE', 20),
+	(55, 'vélo d\'intérieur', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRL4tShcyt3uBZF49x-c-C-6O32WZIcnZ_hmBy9Zc-JD-edpHMBUlZhFTBMafOEy2Ue_1LLCIWpNp-MFbEtCwNL7AFRaVVFiajgIRgbjoEVZ8JLYAfQBW20KA&usqp=CAE', 20),
 	(56, 'grille pain', 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSjNrU-uPNAwUVGS1UP2auvKuiMdKAQh35rdxaONxd8bl0EHdEXOG3zWlYRTAtEqPLTVNAmgyLhvIDEGooZ780MOtLgkMdfF4JLwjJOB9Ew3VA7uJUFT2umhw&usqp=CAE', 2),
 	(57, 'bouilloire', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ9RU19kKn5fTh4yL503DkQgoYePV7PKdyVhF6wt1JIbFVek0DcU_emAfXZ1ET5R8d5Lkq-c9_TcujM2UJNDcw0Uvc-D8OkHoF0IDxorRYBf_v_ORPgooF4-Q&usqp=CAE', 2),
 	(58, 'four', 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTlwrgErJphKo8vnzNSfJfVSFPV0w5T2zlMV9fdV3NY69RGEKoILYyyHJYuGn8txW1wLd4IWmz6uWRfOK63kf9wPOATCNIeXdqcmqOCOa58RFiaSxRAVooZ&usqp=CAE', 2),
 	(59, 'bague', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT2iGzNXvAFbJzJ30jxb37NynKXb6LRYDKNsILEhMyNqivT4CYhX6eihuSXlgwOepRwtn8kCnqJmox8uqMm8_pwiLj3W4piSmisJB3tj-JvJ-Z18WTRuFAoJKML&usqp=CAE', 12),
-	(60, 'montre', 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNsit1nmmaOPh77_d9U6TNP_xUrZ1gOUlLL-2f8YZcMzQMGz2pZjA0buDu077k4cavRuxhvHHX6FeKg65PDmG04zQBvtIG-z7enUcV-5p1NFRB2pql650i9g&usqp=CAE', 12);
+	(60, 'montre', 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSNsit1nmmaOPh77_d9U6TNP_xUrZ1gOUlLL-2f8YZcMzQMGz2pZjA0buDu077k4cavRuxhvHHX6FeKg65PDmG04zQBvtIG-z7enUcV-5p1NFRB2pql650i9g&usqp=CAE', 12),
+	(61, 'Ps5', NULL, 4);
 
 -- Listage de la structure de table stockage. stock
+DROP TABLE IF EXISTS `stock`;
 CREATE TABLE IF NOT EXISTS `stock` (
   `id_entrepot` int NOT NULL,
   `id_objet` int NOT NULL,
@@ -140,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `stock` (
   CONSTRAINT `FK_stock_liste_objets` FOREIGN KEY (`id_objet`) REFERENCES `liste_objets` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table stockage.stock : ~60 rows (environ)
+-- Listage des données de la table stockage.stock : ~61 rows (environ)
 DELETE FROM `stock`;
 INSERT INTO `stock` (`id_entrepot`, `id_objet`, `quantity`) VALUES
 	(1, 1, 35),
@@ -202,9 +208,11 @@ INSERT INTO `stock` (`id_entrepot`, `id_objet`, `quantity`) VALUES
 	(3, 57, 540),
 	(3, 58, 235),
 	(3, 59, 10),
-	(3, 60, 4);
+	(3, 60, 4),
+	(1, 61, 40);
 
 -- Listage de la structure de table stockage. types
+DROP TABLE IF EXISTS `types`;
 CREATE TABLE IF NOT EXISTS `types` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` text NOT NULL,

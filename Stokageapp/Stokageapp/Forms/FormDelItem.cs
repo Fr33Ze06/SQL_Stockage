@@ -59,22 +59,29 @@ namespace Stokageapp.Forms
                     // Définissez votre commande SQL pour récupérer les IDs des entrepôts
                     string query = "SELECT id FROM entrepots";
 
+                    // Utilisez une liste pour stocker les résultats de la requête
+                    List<int> ids = new List<int>();
+
                     // Utilisez un objet MySqlCommand pour exécuter la requête SQL
                     using (MySqlCommand cmd = new MySqlCommand(query, connect))
                     {
                         // Utilisez un objet MySqlDataReader pour lire les résultats de la requête
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            // Effacez la liste actuelle des IDs d'entrepôt
-                            listBoxEntrepot.Items.Clear();
-
                             // Parcourez les résultats et ajoutez chaque ID à la liste
                             while (reader.Read())
                             {
                                 int idEntrepot = reader.GetInt32("id");
-                                listBoxEntrepot.Items.Add(idEntrepot);
+                                ids.Add(idEntrepot);
                             }
-                        }
+                        } // Le using se charge automatiquement de fermer le reader ici
+                    }
+
+                    // Après avoir fermé le reader, ajoutez les éléments à la listBox
+                    listBoxEntrepot.Items.Clear();
+                    foreach (int id in ids)
+                    {
+                        listBoxEntrepot.Items.Add(id);
                     }
                 }
             }
@@ -85,6 +92,8 @@ namespace Stokageapp.Forms
             }
         }
 
+
+
         private void buttonDelstockitem_Click(object sender, EventArgs e)
         {
             try
@@ -92,12 +101,20 @@ namespace Stokageapp.Forms
                 // Récupérer les valeurs saisies par l'utilisateur
                 int id = Convert.ToInt32(listBoxEntrepot.Text);
                 string nom = textBoxItemNameD.Text;
-                int quantite = Convert.ToInt32(textBoxQuantityD.Text);
-                Console.WriteLine("Ceci est un message dans la console.");
+                int quantite = 0;
+                if (int.TryParse(textBoxQuantityD.Text, out int quantiteValue))
+                {
+                    quantite = quantiteValue;
+                }
+                else
+                {
+                    Console.WriteLine("La quantité n'est pas un nombre entier valide.");
+                    return;
+                }
+
+                Console.WriteLine($"Supprimer item | ID: {id}, Nom: {nom}, Quantité: {quantite}");
 
                 gestionStock.SupprimerObjet(id, nom, quantite);
-
-                // Mettez à jour votre interface ou effectuez d'autres actions après la suppression réussie
             }
             catch (Exception ex)
             {
