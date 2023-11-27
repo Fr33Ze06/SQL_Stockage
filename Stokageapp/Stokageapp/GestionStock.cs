@@ -16,93 +16,113 @@ public class GestionStock
         connect = new MySqlConnection(connectionString);
         connect.Open();
     }
+
     public void Dispose()
     {
-        connect.Close();
+        if (connect != null && connect.State == ConnectionState.Open)
+        {
+            connect.Close();
+        }
     }
 
     public static GestionStock gestionStock { get; internal set; }
 
-    public void SupprimerObjet(int id, string nom, int quantite)
+    public void SupprimerObjet(int idEntrepot, string nom, int quantite)
     {
         try
         {
+            Console.WriteLine($"SupprimerObjet: Start. ID Entrepot: {idEntrepot}, Nom: {nom}, Quantité: {quantite}");
+
             // Vérifier s'il y a suffisamment d'objets dans l'entrepôt
-            string verifQuantiteQuery = "SELECT quantity, id_entrepot FROM Stock " +
+            string verifQuantiteQuery = "SELECT quantity FROM Stock " +
                             "JOIN Liste_objets ON Stock.id_objet = Liste_objets.id " +
                             "WHERE Stock.id_entrepot = @Id AND Liste_objets.name = @Nom";
 
+
             using (MySqlCommand cmdVerifQuantite = new MySqlCommand(verifQuantiteQuery, connect))
             {
-                cmdVerifQuantite.Parameters.AddWithValue("@Id", id);
+                cmdVerifQuantite.Parameters.AddWithValue("@Id", idEntrepot);
                 cmdVerifQuantite.Parameters.AddWithValue("@Nom", nom);
 
-                using (MySqlDataReader readerSupp = cmdVerifQuantite.ExecuteReader(CommandBehavior.CloseConnection))
+                using (MySqlDataReader readerSupp = cmdVerifQuantite.ExecuteReader())
                 {
-                    try
+
+                    if (readerSupp.Read())
                     {
-                        if (readerSupp.Read())
+                        int quantiteActuelle = Convert.ToInt32(readerSupp["quantity"]);
+
+                        Console.WriteLine($"SupprimerObjet: Quantité actuelle: {quantiteActuelle}, ID Entrepot: {idEntrepot}");
+
+                        if (quantiteActuelle < quantite)
                         {
-                            int quantiteActuelle = Convert.ToInt32(readerSupp["quantity"]);
-                            int idEntrepot = Convert.ToInt32(readerSupp["id_entrepot"]);
+                            // Gérer le cas où la quantité à supprimer est supérieure à la quantité disponible
+                            Console.WriteLine("SupprimerObjet: Quantité insuffisante dans l'entrepôt.");
+                            return;
+                        }
 
-                            if (quantiteActuelle < quantite)
+                        readerSupp.Close();
+                        // Mettre à jour la quantité dans la base de données
+                        int nouvelleQuantite = quantiteActuelle - quantite;
+                        Console.WriteLine($"NOUVELLE Q: {nouvelleQuantite} ID ENTREPOT: {idEntrepot}"); //ID OBJET: {idObjet}");
+
+                        if (nouvelleQuantite > 0)
+                        {
+                            using (MySqlTransaction transaction = connect.BeginTransaction())
                             {
-                                // Gérer le cas où la quantité à supprimer est supérieure à la quantité disponible
-                                Console.WriteLine("Quantité insuffisante dans l'entrepôt.");
-                                return;
-                            }
-
-                            // Mettre à jour la quantité dans la base de données
-                            int nouvelleQuantite = quantiteActuelle - quantite;
-
-                            if (nouvelleQuantite > 0)
-                            {
-                                string updateQuantiteQuery = "UPDATE Stock SET quantity = @Quantite " +
-                                                             "WHERE id_entrepot = @IdEntrepot AND id_objet = @IdObjet";
-
-                                using (MySqlCommand cmdUpdateQuantite = new MySqlCommand(updateQuantiteQuery, connect))
+                                try
                                 {
-                                    cmdUpdateQuantite.Parameters.AddWithValue("@Quantite", nouvelleQuantite);
-                                    cmdUpdateQuantite.Parameters.AddWithValue("@IdEntrepot", idEntrepot);
-                                    cmdUpdateQuantite.Parameters.AddWithValue("@IdObjet", id);
-                                    cmdUpdateQuantite.ExecuteNonQuery();
-                                    Console.WriteLine("Quantité mise à jour dans l'entrepôt.");
+                                    string updateQuantiteQuery = "UPDATE Stock SET quantity = @Quantite " +
+                                                                 "WHERE id_entrepot = @IdEntrepot AND id_objet = (SELECT id FROM Liste_objets WHERE name = @Nom)";
+
+                                    using (MySqlCommand cmdUpdateQuantite = new MySqlCommand(updateQuantiteQuery, connect))
+                                    {
+                                        cmdUpdateQuantite.Parameters.AddWithValue("@Quantite", nouvelleQuantite);
+                                        cmdUpdateQuantite.Parameters.AddWithValue("@IdEntrepot", idEntrepot);
+                                        cmdUpdateQuantite.Parameters.AddWithValue("@Nom", nom);
+                                        cmdUpdateQuantite.ExecuteNonQuery();
+                                        Console.WriteLine("SupprimerObjet: Quantité mise à jour dans l'entrepôt.");
+                                    }
+
+                                    transaction.Commit();
                                 }
-                            }
-                            else
-                            {
-                                // Supprimer l'objet s'il n'y a plus de stock
-                                string deleteObjetQuery = "DELETE FROM Stock " +
-                                                          "WHERE id_entrepot = @IdEntrepot AND id_objet = @IdObjet";
-
-                                using (MySqlCommand cmdDeleteObjet = new MySqlCommand(deleteObjetQuery, connect))
+                                catch (Exception ex)
                                 {
-                                    cmdDeleteObjet.Parameters.AddWithValue("@IdEntrepot", idEntrepot);
-                                    cmdDeleteObjet.Parameters.AddWithValue("@IdObjet", id);
-                                    cmdDeleteObjet.ExecuteNonQuery();
-                                    Console.WriteLine("Objet supprimé de l'entrepôt.");
+                                    Console.WriteLine($"Erreur : {ex.Message}");
+                                    transaction.Rollback();
                                 }
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Objet non trouvé dans l'entrepôt.");
+                            // Supprimer l'objet s'il n'y a plus de stock
+                            string deleteObjetQuery = "DELETE FROM Stock " +
+                                                      "WHERE id_entrepot = @IdEntrepot AND id_objet = (SELECT id FROM Liste_objets WHERE name = @Nom)";
+
+                            using (MySqlCommand cmdDeleteObjet = new MySqlCommand(deleteObjetQuery, connect))
+                            {
+                                cmdDeleteObjet.Parameters.AddWithValue("@IdEntrepot", idEntrepot);
+                                cmdDeleteObjet.Parameters.AddWithValue("@Nom", nom);
+                                cmdDeleteObjet.ExecuteNonQuery();
+                                Console.WriteLine("SupprimerObjet: Objet supprimé de l'entrepôt.");
+                            }
                         }
                     }
-                    finally
+                    else
                     {
-                        // Assurez-vous que le DataReader est toujours fermé même en cas d'exception
-                        readerSupp.Close();
+                        Console.WriteLine("SupprimerObjet: Objet non trouvé dans l'entrepôt.");
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Une erreur s'est produite dans la gestionstock.cs : {ex.Message}");
+            Console.WriteLine($"SupprimerObjet: Une erreur s'est produite dans la gestionstock.cs : {ex.Message}");
         }
     }
+
+
+
+
 
     public void AjouterObjet(int id, string nom, int quantite, string type)
     {
@@ -142,10 +162,14 @@ public class GestionStock
 
                 using (MySqlDataReader readerGetType = cmdGetType.ExecuteReader())
                 {
-                    if (readerGetType.Read())
+                    try
                     {
-                        idType = readerGetType.GetInt32("id");
+                        if (readerGetType.Read())
+                        {
+                            idType = readerGetType.GetInt32("id");
+                        }
                     }
+                    finally { readerGetType.Close(); }
                 }
             }
 
